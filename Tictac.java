@@ -1,15 +1,30 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
-import javax.swing.JDesktopPane;
-import javax.swing.JDialog;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.FontUIResource;
 
 class Tictac implements ActionListener {
+    public void playSound(String soundName) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+    }
+
     JFrame jf;
     JButton one, two, three, four, five, six, seven, eight, nine;
     int count = 0;
@@ -71,6 +86,7 @@ class Tictac implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        playSound("/Users/devenrtwal/Documents/Projects 2022/Sounds/click2.wav");
         count++;
         if (count % 2 == 0) {
             str = "O";

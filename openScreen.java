@@ -5,10 +5,25 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
 
 public class openScreen implements ActionListener
 
 {
+    public void playSound(String soundName) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+    }
 
     JFrame jf;
     JLabel jl1;
@@ -49,6 +64,8 @@ public class openScreen implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        playSound("/Users/devenrtwal/Documents/Projects 2022/Sounds/click.wav");
+
         String name1 = jl1.getText();
         String name2 = jl2.getText();
 
