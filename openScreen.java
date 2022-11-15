@@ -37,6 +37,7 @@ public class openScreen implements ActionListener
         jf.setSize(400, 400);
         jf.setDefaultCloseOperation(3);
         jf.setLayout(null);
+        jf.setLocationRelativeTo(null);
 
         jl1 = new JLabel("Player One :");
         jl1.setBounds(80, 103, 100, 30);
@@ -66,8 +67,8 @@ public class openScreen implements ActionListener
     public void actionPerformed(ActionEvent e) {
         playSound("/Users/devenrtwal/Documents/Projects 2022/Sounds/click.wav");
 
-        String name1 = jl1.getText();
-        String name2 = jl2.getText();
+        String name1 = jt1.getText();
+        String name2 = jt2.getText();
 
         Tictac game = new Tictac();
         game.playerName(name1, name2);

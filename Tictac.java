@@ -44,6 +44,7 @@ class Tictac implements ActionListener {
         jf.setDefaultCloseOperation(3);
         jf.setSize(400, 400);
         jf.setLayout(new GridLayout(3, 3));
+        jf.setLocationRelativeTo(null);
 
         one = new JButton();
         one.addActionListener(this);
@@ -159,11 +160,62 @@ class Tictac implements ActionListener {
     }
 
     void whoWins() {
+        String Winner;
+        if (str == "X") {
+            Winner = name1;
+        } else {
+            Winner = name2;
+        }
         if (k) {
-            JOptionPane.showMessageDialog(jf, str + " Wins");
-        } else if (k == false && count == 9) {
+            JOptionPane.showMessageDialog(jf, Winner + " Wins");
+            int result = JOptionPane.showConfirmDialog(jf, "Restart?");
+            if (result == 0) {
+                restart(str);
+            } else {
+                System.exit(0);
+            }
+        } else if (k == false && count >= 9) {
             JOptionPane.showMessageDialog(jf, "Match Draw");
         }
+
+    }
+
+    void buttonEnabling(boolean bool) {
+        one.setEnabled(bool);
+        two.setEnabled(bool);
+        three.setEnabled(bool);
+        four.setEnabled(bool);
+        five.setEnabled(bool);
+        six.setEnabled(bool);
+        seven.setEnabled(bool);
+        eight.setEnabled(bool);
+        nine.setEnabled(bool);
+
+    }
+
+    void clearText(String str) {
+        one.setText(str);
+        two.setText(str);
+        three.setText(str);
+        four.setText(str);
+        five.setText(str);
+        six.setText(str);
+        seven.setText(str);
+        eight.setText(str);
+        nine.setText(str);
+    }
+
+    void restart(String Winner) {
+        buttonEnabling(true);
+        clearText("");
+        if (Winner == "X") {
+
+            count = 0;
+        } else {
+
+            count = 1;
+        }
+
     }
 
 }
